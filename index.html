@@ -17,7 +17,7 @@
             margin:20px 0;
         }
         button{
-            width: 20px;
+            width: 100px;
             margin-left: 10px;
         }
         ul{
@@ -26,73 +26,65 @@
     </style>
 </head>
 <body>
-<label>跳转至<button id="search">1</button></label>
+<label>跳转至<button id="search">上海商户</button></label>
 <ul id="returnSearch">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
 </ul>
 <script src="http://code.jquery.com/jquery-1.4.1.js"></script>
 <script>
-    //    document.getElementById("search").onclick=function(){
-    //        //发送ajax跳转请求并处理
-    //        var request=new XMLHttpRequest();
-    //        request.open("GET","http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200");
-    //        request.send();
-    //        request.onreadystatechange=function () {
-    //            if(request.readyState===4){
-    //                if(request.status===200){
-    //                    var datas=JSON.parse(request.responseText);
-    //                    for(var i=0;i<datas.data.dataList.length;i++){
-    //                        document.getElementsByTagName("li")[i].innerHTML=datas.data.dataList[i].title;
-    //                    }
-    //                }
-    //                else{
-    //                        document.getElementsByTagName("li")[0].innerHTML="出现错误:"+datas;
-    //                }
-    //            }
-    //            else{
-    //                    alert("发生错误:"+request.status);
-    //                }
-    //        }
-    //    };
-    //jquery实现
-    $("#search").click(function(){
-//        $.ajax({
-//            type:"GET",
-//            url:"http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200",
-//            dataType:"jsonp",
-//            success:function(datas){
-//                console.log(datas);
-//                if(datas.success){
-//                    $("li")[0].html(datas.data.dataList[0].title);
+//    function doSomething(jsonData) {
+//        document.getElementById("search").onclick = function () {
+//            //发送ajax跳转请求并处理
+//            var request = new XMLHttpRequest();
+//            request.open("GET", "http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484");
+//            request.send();
+//            request.onreadystatechange = function () {
+//                if (request.readyState === 4) {
+//                    if (request.status === 200) {
+//                        var datas = JSON.parse(request.responseText);
+//                        console.log(datas);
+                        // for (var i = 0; i < jsonData.data.listData.length; i++) {
+//                    var link = $('<li>');
+//                    link.html(jsonData.data.listData[i].shopName);
+//                    link.appendTo('ul');
+//                }
+//                    }
+//                    else{
+//                            document.getElementsByTagName("li")[0].innerHTML="出现错误:"+datas;
+//                    }
 //                }
 //                else{
-//                    $("li")[0].html("出现错误:"+datas.data.dataList[0].title);
+//                        alert("发生错误:"+request.status);
+                        //                  }
+//                    }
 //                }
-//            },
-//            error:function(jqXHR){
-//                alert("发生错误:"+jqXHR.status);
-//            }
-//        });
-        $.getJSON('http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484&callback=?', function (jsonData) {
-            console.log(jsonData);
+//            };
+//        }
+//    }
+$.ajax = function (param) {
+
+};
+//jquery实现
+    $("#search").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484",
+            dataType:"jsonp",
+            success:function(jsonData) {
+                for (var i = 0; i < jsonData.data.listData.length; i++) {
+                    var link = $('<li>');
+                    link.html(jsonData.data.listData[i].shopName);
+                    link.appendTo('ul');
+                }
+            },
+            error:function(jqXHR){
+                alert("发生错误:"+jqXHR.status);
+            }
         });
     });
-
-
+    $.getJSON('http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484&callback=?', function (jsonData) {
+                console.log(jsonData);
+    });
 </script>
+<!--<script src="http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484&callback=doSomething"></script>-->
 </body>
 </html>
