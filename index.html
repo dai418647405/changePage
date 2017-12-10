@@ -46,47 +46,53 @@
 </ul>
 <script src="http://code.jquery.com/jquery-1.4.1.js"></script>
 <script>
-    document.getElementById("search").onclick=function(){
-        //发送ajax跳转请求并处理
-        var request=new XMLHttpRequest();
-        request.open("GET","http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200");
-        request.send();
-        request.onreadystatechange=function () {
-            if(request.readyState===4){
-                if(request.status===200){
-                    var datas=JSON.parse(request.responseText);
-                    for(var i=0;i<datas.data.dataList.length;i++){
-                        document.getElementsByTagName("li")[i].innerHTML=datas.data.dataList[i].title;
-                    }
-                }
-                else{
-                        document.getElementsByTagName("li")[0].innerHTML="出现错误:"+datas;
-                }
-            }
-            else{
-                    alert("发生错误:"+request.status);
-                }
-        }
-    };
+    //    document.getElementById("search").onclick=function(){
+    //        //发送ajax跳转请求并处理
+    //        var request=new XMLHttpRequest();
+    //        request.open("GET","http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200");
+    //        request.send();
+    //        request.onreadystatechange=function () {
+    //            if(request.readyState===4){
+    //                if(request.status===200){
+    //                    var datas=JSON.parse(request.responseText);
+    //                    for(var i=0;i<datas.data.dataList.length;i++){
+    //                        document.getElementsByTagName("li")[i].innerHTML=datas.data.dataList[i].title;
+    //                    }
+    //                }
+    //                else{
+    //                        document.getElementsByTagName("li")[0].innerHTML="出现错误:"+datas;
+    //                }
+    //            }
+    //            else{
+    //                    alert("发生错误:"+request.status);
+    //                }
+    //        }
+    //    };
     //jquery实现
     $("#search").click(function(){
-        $.ajax({
-            type:"GET",
-            url:"http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200",
-            dataType:"jsonp",
-            success:function(datas){
-                if(datas.success){
-                    $("li")[0].html(datas.data.dataList[0].title);
-                }
-                else{
-                    $("li")[0].html("出现错误:"+datas.data.dataList[0].title);
-                }
-            },
-            error:function(jqXHR){
-                alert("发生错误:"+jqXHR.status);
-            }
+//        $.ajax({
+//            type:"GET",
+//            url:"http://www.hupueasy.com/api/hupu/list?topicId=1&sortType=3&current=1&pageSize=15&total=200",
+//            dataType:"jsonp",
+//            success:function(datas){
+//                console.log(datas);
+//                if(datas.success){
+//                    $("li")[0].html(datas.data.dataList[0].title);
+//                }
+//                else{
+//                    $("li")[0].html("出现错误:"+datas.data.dataList[0].title);
+//                }
+//            },
+//            error:function(jqXHR){
+//                alert("发生错误:"+jqXHR.status);
+//            }
+//        });
+        $.getJSON('http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484&callback=?', function (jsonData) {
+            console.log(jsonData);
         });
     });
+
+
 </script>
 </body>
 </html>
