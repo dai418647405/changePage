@@ -67,6 +67,7 @@
             url:"http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484",
             dataType:"jsonp",
             success:function(jsonData) {
+                //判断数据是否正确
                 if(jsonData.data.mainCity){
                     for (var i = 0; i < jsonData.data.listData.length; i++) {
                         var link = $('<li>');
