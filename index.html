@@ -67,10 +67,15 @@
             url:"http://m.dianping.com/ranklist/2017/list/page/shop?cityId=1&begin=0&offset=30&type=4&userLat=&userLng=&userCityId=&brandId=&_=1512890263484",
             dataType:"jsonp",
             success:function(jsonData) {
-                for (var i = 0; i < jsonData.data.listData.length; i++) {
-                    var link = $('<li>');
-                    link.html(jsonData.data.listData[i].shopName);
-                    link.appendTo('ul');
+                if(jsonData.data.mainCity){
+                    for (var i = 0; i < jsonData.data.listData.length; i++) {
+                        var link = $('<li>');
+                        link.html(jsonData.data.listData[i].shopName);
+                        link.appendTo('ul');
+                    }
+                }
+                else{
+                    alert("出现错误:"+jsonData.data.mainCity);
                 }
             },
             error:function(jqXHR){
